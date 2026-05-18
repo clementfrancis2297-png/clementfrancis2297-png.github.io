@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clement Francis — Mechanical &amp; Thermal Engineer</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Mono:wght@300;400&family=Fraunces:ital,opsz,wght@1,9..144,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --orange: #E8510A;
+    --orange-light: #F97316;
+    --teal: #0D7B5E;
+    --charcoal: #1A1A1F;
+    --charcoal-mid: #111115;
+    --white: #FAFAF8;
+    --yellow: #F5C842;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'DM Mono', monospace; background: var(--charcoal); color: var(--white); overflow-x: hidden; }
+
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.2rem 3rem;
+    background: rgba(26,26,31,0.92); backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(232,81,10,0.15);
+  }
+  .nav-logo { font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 800; color: var(--orange-light); letter-spacing: 0.05em; }
+  .nav-links { display: flex; gap: 2rem; }
+  .nav-links a { font-size: 0.72rem; text-decoration: none; color: #888; letter-spacing: 0.12em; text-transform: uppercase; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--orange-light); }
+
+  .hero {
+    min-height: 100vh; display: flex; flex-direction: column; justify-content: flex-end;
+    padding: 8rem 3rem 4rem; position: relative; overflow: hidden;
+    background: radial-gradient(ellipse 80% 60% at 70% 40%, rgba(232,81,10,0.1) 0%, transparent 70%),
+                radial-gradient(ellipse 50% 40% at 15% 70%, rgba(13,123,94,0.07) 0%, transparent 60%),
+                var(--charcoal);
+  }
+  .hero-label { font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--orange-light); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.75rem; }
+  .hero-label::before { content: ''; display: inline-block; width: 32px; height: 1px; background: var(--orange-light); }
+  .hero h1 { font-family: 'Syne', sans-serif; font-size: clamp(3rem, 8vw, 7rem); font-weight: 800; line-height: 0.95; letter-spacing: -0.02em; }
+  .hero h1 em { color: var(--orange-light); display: block; font-style: normal; }
+  .hero-sub { font-family: 'Fraunces', serif; font-style: italic; font-size: 1.2rem; color: #888; margin-top: 1.5rem; max-width: 580px; }
+  .hero-actions { display: flex; gap: 1rem; margin-top: 2.5rem; flex-wrap: wrap; }
+  .btn-primary { background: var(--orange); color: white; padding: 0.9rem 2rem; border: none; cursor: pointer; font-family: 'DM Mono', monospace; font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px)); transition: background 0.2s, transform 0.15s; text-decoration: none; display: inline-block; }
+  .btn-primary:hover { background: var(--orange-light); transform: translateY(-2px); }
+  .btn-ghost { background: transparent; color: #aaa; padding: 0.9rem 2rem; border: 1px solid #444; font-family: 'DM Mono', monospace; font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; transition: color 0.2s, border-color 0.2s; text-decoration: none; display: inline-block; }
+  .btn-ghost:hover { color: var(--white); border-color: #888; }
+  .hero-stats { display: flex; gap: 3rem; margin-top: 4rem; padding-top: 2rem; border-top: 1px solid #2d2d35; flex-wrap: wrap; }
+  .stat-num { font-family: 'Syne', sans-serif; font-size: 2.2rem; font-weight: 800; color: var(--orange-light); }
+  .stat-label { font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase; color: #555; margin-top: 0.2rem; }
+  .hero-schematic { position: absolute; right: 3rem; top: 50%; transform: translateY(-50%); opacity: 0.12; pointer-events: none; }
+
+  section { padding: 6rem 3rem; }
+  .section-eyebrow { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--orange-light); margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.75rem; }
+  .section-eyebrow::before { content: ''; display: inline-block; width: 20px; height: 1px; background: var(--orange-light); }
+  .section-title { font-family: 'Syne', sans-serif; font-size: clamp(2rem, 4vw, 3rem); font-weight: 800; line-height: 1.05; margin-bottom: 3rem; }
+
+  /* ABOUT */
+  .about { background: var(--charcoal-mid); }
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+  .about-text p { font-family: 'Fraunces', serif; font-style: italic; font-size: 1.1rem; line-height: 1.85; color: #bbb; margin-bottom: 1.4rem; }
+  .about-text strong { color: var(--orange-light); }
+  .about-svg { display: flex; justify-content: center; }
+
+  /* SKILLS */
+  .skills { background: var(--charcoal); }
+  .skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5px; }
+  .skill-card { background: var(--charcoal-mid); padding: 2rem; position: relative; overflow: hidden; transition: background 0.2s; }
+  .skill-card::after { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: var(--accent, var(--orange)); transform: scaleX(0); transform-origin: left; transition: transform 0.3s; }
+  .skill-card:hover::after { transform: scaleX(1); }
+  .skill-card:hover { background: #1a1a20; }
+  .skill-icon { font-size: 1.6rem; margin-bottom: 1rem; }
+  .skill-name { font-family: 'Syne', sans-serif; font-size: 0.9rem; font-weight: 700; color: var(--white); margin-bottom: 0.5rem; }
+  .skill-level { position: absolute; top: 1.5rem; right: 1.5rem; font-size: 0.6rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent, var(--orange)); opacity: 0.65; }
+  .skill-items { font-size: 0.72rem; color: #666; line-height: 1.9; }
+
+  /* PROJECTS */
+  .projects { background: var(--charcoal-mid); }
+  .projects-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2px; }
+  .project-card { background: var(--charcoal); padding: 2.5rem; position: relative; overflow: hidden; transition: transform 0.2s; }
+  .project-card:hover { transform: translateY(-4px); }
+  .project-num { font-family: 'Syne', sans-serif; font-size: 4rem; font-weight: 800; color: #1e1e24; position: absolute; top: 1.5rem; right: 1.5rem; line-height: 1; user-select: none; }
+  .project-tag { display: inline-block; font-size: 0.58rem; letter-spacing: 0.15em; text-transform: uppercase; padding: 0.3rem 0.75rem; border: 1px solid; margin-bottom: 1.25rem; }
+  .project-title { font-family: 'Syne', sans-serif; font-size: 1.25rem; font-weight: 700; line-height: 1.2; margin-bottom: 0.85rem; color: var(--white); max-width: 85%; }
+  .project-desc { font-size: 0.77rem; line-height: 1.8; color: #777; }
+  .project-footer { display: flex; justify-content: space-between; align-items: flex-end; margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid #222; }
+  .project-tools { display: flex; gap: 0.4rem; flex-wrap: wrap; }
+  .tool-badge { font-size: 0.58rem; letter-spacing: 0.08em; text-transform: uppercase; padding: 0.2rem 0.5rem; background: #1e1e24; color: #666; }
+  .project-arrow { font-size: 1.1rem; color: var(--orange-light); transition: transform 0.2s; flex-shrink: 0; }
+  .project-card:hover .project-arrow { transform: translate(3px, -3px); }
+
+  /* EXPERIENCE */
+  .experience { background: var(--charcoal); }
+  .exp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; }
+  .timeline { position: relative; padding-left: 2rem; }
+  .timeline::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 1px; background: linear-gradient(to bottom, var(--orange), #2d2d35 90%); }
+  .timeline-item { position: relative; padding: 0 0 2.8rem 2.5rem; }
+  .timeline-item::before { content: ''; position: absolute; left: calc(-2rem - 3px); top: 0.45rem; width: 7px; height: 7px; background: var(--orange); transform: rotate(45deg); }
+  .tl-date { font-size: 0.62rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--orange-light); margin-bottom: 0.4rem; }
+  .tl-role { font-family: 'Syne', sans-serif; font-size: 1.05rem; font-weight: 700; color: var(--white); margin-bottom: 0.2rem; }
+  .tl-company { font-size: 0.73rem; color: #555; margin-bottom: 0.75rem; }
+  .tl-desc { font-size: 0.76rem; line-height: 1.8; color: #888; }
+
+  /* CONTACT */
+  .contact { background: var(--charcoal-mid); }
+  .contact-cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5px; margin-top: 2rem; max-width: 720px; }
+  .contact-card { background: var(--charcoal); padding: 2rem; position: relative; overflow: hidden; transition: background 0.2s; }
+  .contact-card::after { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: var(--accent, var(--orange)); transform: scaleX(0); transform-origin: left; transition: transform 0.3s; }
+  .contact-card:hover::after { transform: scaleX(1); }
+  .contact-card:hover { background: #1a1a20; }
+  .cc-icon { font-size: 1.5rem; margin-bottom: 0.75rem; }
+  .cc-label { font-size: 0.6rem; letter-spacing: 0.18em; text-transform: uppercase; color: #555; margin-bottom: 0.5rem; }
+  .cc-val { font-family: 'Syne', sans-serif; font-size: 0.95rem; font-weight: 700; }
+  .cc-val a { color: var(--orange-light); text-decoration: none; transition: color 0.2s; }
+  .cc-val a:hover { color: var(--white); }
+  .cc-val span { color: #aaa; font-size: 0.85rem; }
+
+  footer { background: #0A0A0D; padding: 2rem 3rem; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #1e1e24; flex-wrap: wrap; gap: 0.5rem; }
+  .footer-copy { font-size: 0.68rem; color: #333; }
+  .footer-tag { font-family: 'Fraunces', serif; font-style: italic; font-size: 0.82rem; color: #444; }
+
+  .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.6s, transform 0.6s; }
+  .reveal.visible { opacity: 1; transform: none; }
+
+  @media (max-width: 860px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { gap: 1rem; font-size: 0.65rem; }
+    .hero { padding: 7rem 1.5rem 3rem; }
+    .hero-schematic { display: none; }
+    section { padding: 4rem 1.5rem; }
+    .about-grid, .exp-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    .skills-grid { grid-template-columns: 1fr 1fr; }
+    .projects-grid, .contact-cards { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 520px) {
+    .skills-grid { grid-template-columns: 1fr; }
+    .hero-stats { gap: 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">CLEMENT FRANCIS</div>
+  <div class="nav-links">
+    <a href="#about">About</a>
+    <a href="#skills">Skills</a>
+    <a href="#projects">Projects</a>
+    <a href="#experience">Experience</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <svg class="hero-schematic" width="400" height="360" viewBox="0 0 400 360" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="200" cy="180" r="140" stroke="#E8510A" stroke-width="0.5" stroke-dasharray="4 8"/>
+    <circle cx="200" cy="180" r="100" stroke="#E8510A" stroke-width="0.5"/>
+    <circle cx="200" cy="180" r="60" stroke="#E8510A" stroke-width="1"/>
+    <circle cx="200" cy="180" r="22" stroke="#E8510A" stroke-width="1.5" fill="rgba(232,81,10,0.04)"/>
+    <line x1="200" y1="180" x2="340" y2="180" stroke="#E8510A" stroke-width="0.5"/>
+    <line x1="200" y1="180" x2="270" y2="59" stroke="#E8510A" stroke-width="0.5"/>
+    <line x1="200" y1="180" x2="100" y2="59" stroke="#E8510A" stroke-width="0.5"/>
+    <line x1="200" y1="180" x2="60" y2="180" stroke="#E8510A" stroke-width="0.5"/>
+    <line x1="200" y1="180" x2="100" y2="301" stroke="#E8510A" stroke-width="0.5"/>
+    <line x1="200" y1="180" x2="270" y2="301" stroke="#E8510A" stroke-width="0.5"/>
+    <circle cx="340" cy="180" r="4" fill="#E8510A"/>
+    <circle cx="270" cy="59" r="4" fill="#E8510A"/>
+    <circle cx="100" cy="59" r="4" fill="#E8510A"/>
+    <circle cx="60" cy="180" r="4" fill="#E8510A"/>
+    <circle cx="100" cy="301" r="4" fill="#E8510A"/>
+    <circle cx="270" cy="301" r="4" fill="#E8510A"/>
+    <text x="350" y="185" fill="#E8510A" font-family="monospace" font-size="8" opacity="0.8">Q̇=ṁcₚΔT</text>
+    <text x="4" y="185" fill="#E8510A" font-family="monospace" font-size="8" opacity="0.8">η=W/Q</text>
+    <text x="275" y="52" fill="#E8510A" font-family="monospace" font-size="8" opacity="0.8">∇²T=0</text>
+  </svg>
+
+  <div class="hero-label">Mechanical &amp; Thermal Engineer · Regensburg, Germany</div>
+  <h1>
+    Clement<br>
+    <em>Francis.</em>
+  </h1>
+  <p class="hero-sub">MSc in Simulation &amp; System Design — specialising in CFD, thermal management, and multi-physics simulation for sustainable energy &amp; e-mobility systems.</p>
+
+  <div class="hero-actions">
+    <button class="btn-primary" onclick="document.getElementById('projects').scrollIntoView({behavior:'smooth'})">View Projects</button>
+    <a class="btn-ghost" href="#contact">Contact Me →</a>
+  </div>
+
+  <div class="hero-stats">
+    <div><div class="stat-num">5+</div><div class="stat-label">Years Experience</div></div>
+    <div><div class="stat-num">92%</div><div class="stat-label">Model Validation</div></div>
+    <div><div class="stat-num">8°C</div><div class="stat-label">Peak Temp Reduction</div></div>
+    <div><div class="stat-num">30%</div><div class="stat-label">Setup Time Cut</div></div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="section-eyebrow">Who I Am</div>
+  <div class="about-grid">
+    <div class="reveal">
+      <h2 class="section-title">Heat. Flow.<br>Precision.</h2>
+      <p>I'm a mechanical engineer with a <strong>Master's in Simulation and System Design</strong> and hands-on experience across thermal management, CFD, and experimental validation — from 3D-printed heat sinks at Fraunhofer to EV cooling modules at MAHLE Behr.</p>
+      <p>I thrive at the intersection of <strong>simulation and physical testing</strong>, building numerical models that hold up under real-world scrutiny. My Fraunhofer thesis achieved <strong>92% model validation accuracy</strong> using ANSYS Fluent and experimental flow measurement.</p>
+      <p>Currently deepening expertise in structural simulation while advancing my German (B1) for fully integrated technical work in Germany.</p>
+    </div>
+    <div class="about-svg reveal">
+      <svg viewBox="0 0 280 280" width="280" height="280" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="arcGrad" x1="0%" y1="100%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#0D7B5E"/>
+            <stop offset="50%" stop-color="#F5C842"/>
+            <stop offset="100%" stop-color="#E8510A"/>
+          </linearGradient>
+        </defs>
+        <circle cx="140" cy="140" r="120" stroke="#1e1e24" stroke-width="1" fill="none"/>
+        <circle cx="140" cy="140" r="90" stroke="#1e1e24" stroke-width="16" fill="none" stroke-dasharray="480 1000" stroke-dashoffset="-120"/>
+        <circle cx="140" cy="140" r="90" stroke="url(#arcGrad)" stroke-width="16" fill="none" stroke-dasharray="350 1000" stroke-dashoffset="-120" stroke-linecap="round"/>
+        <g stroke="#2d2d35" stroke-width="1">
+          <line x1="140" y1="22" x2="140" y2="32"/><line x1="198" y1="38" x2="192" y2="46"/>
+          <line x1="240" y1="82" x2="232" y2="88"/><line x1="258" y1="140" x2="248" y2="140"/>
+          <line x1="240" y1="198" x2="232" y2="192"/><line x1="198" y1="242" x2="192" y2="234"/>
+          <line x1="140" y1="258" x2="140" y2="248"/><line x1="82" y1="242" x2="88" y2="234"/>
+          <line x1="40" y1="198" x2="48" y2="192"/><line x1="22" y1="140" x2="32" y2="140"/>
+        </g>
+        <circle cx="140" cy="140" r="52" fill="#111115" stroke="#1e1e24" stroke-width="1"/>
+        <text x="140" y="128" text-anchor="middle" font-family="Syne,sans-serif" font-size="22" font-weight="800" fill="#E8510A">CFD</text>
+        <text x="140" y="150" text-anchor="middle" font-family="monospace" font-size="8" fill="#555" letter-spacing="2">THERMAL</text>
+        <text x="140" y="167" text-anchor="middle" font-family="monospace" font-size="7" fill="#444">SIMULATION</text>
+        <line x1="140" y1="140" x2="205" y2="90" stroke="#E8510A" stroke-width="2" stroke-linecap="round"/>
+        <circle cx="140" cy="140" r="5" fill="#E8510A"/>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section class="skills" id="skills">
+  <div class="section-eyebrow">Capabilities</div>
+  <h2 class="section-title reveal">Technical Arsenal</h2>
+  <div class="skills-grid">
+    <div class="skill-card reveal" style="--accent:#E8510A">
+      <div class="skill-icon">🔥</div><div class="skill-level">Expert</div>
+      <div class="skill-name">Numerical Simulation &amp; CFD</div>
+      <div class="skill-items">ANSYS Fluent · OpenFOAM<br>Conjugate heat transfer (CHT)<br>Multi-phase / multi-physics<br>Electric powertrain cooling</div>
+    </div>
+    <div class="skill-card reveal" style="--accent:#0D7B5E">
+      <div class="skill-icon">🌡️</div><div class="skill-level">Expert</div>
+      <div class="skill-name">Thermal Management</div>
+      <div class="skill-items">Heat exchanger design<br>Battery thermal mgmt (BTMS)<br>1D / 3D thermal architecture<br>Heat pump optimisation</div>
+    </div>
+    <div class="skill-card reveal" style="--accent:#F5C842">
+      <div class="skill-icon">🧪</div><div class="skill-level">Advanced</div>
+      <div class="skill-name">Experimental &amp; Testing</div>
+      <div class="skill-items">Test rig design &amp; modification<br>Experimental flow measurements<br>LabVIEW · DAQ · MEMS<br>Empirical data correlation</div>
+    </div>
+    <div class="skill-card reveal" style="--accent:#E8510A">
+      <div class="skill-icon">📐</div><div class="skill-level">Advanced</div>
+      <div class="skill-name">CAD &amp; Design Engineering</div>
+      <div class="skill-items">PTC Creo · CATIA V5<br>Structural &amp; flow optimisation<br>BOM management<br>CAD standardisation</div>
+    </div>
+    <div class="skill-card reveal" style="--accent:#0D7B5E">
+      <div class="skill-icon">💻</div><div class="skill-level">Advanced</div>
+      <div class="skill-name">Programming &amp; Tools</div>
+      <div class="skill-items">Python · MATLAB · MAHLE BISS<br>Siemens TIA-Portal (S7 PLC)<br>Data post-processing<br>Benchmarking &amp; reporting</div>
+    </div>
+    <div class="skill-card reveal" style="--accent:#F5C842">
+      <div class="skill-icon">⚡</div><div class="skill-level">Proficient</div>
+      <div class="skill-name">E-Mobility &amp; Energy Systems</div>
+      <div class="skill-items">EV cooling architectures<br>TIM parameter studies<br>Sustainable energy focus<br>Cross-functional collaboration</div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section class="projects" id="projects">
+  <div class="section-eyebrow">Selected Work</div>
+  <h2 class="section-title reveal">Projects</h2>
+  <div class="projects-grid">
+    <div class="project-card reveal">
+      <div class="project-num">01</div>
+      <div class="project-tag" style="color:#E8510A; border-color:rgba(232,81,10,0.35)">Master's Thesis · Fraunhofer FEP</div>
+      <h3 class="project-title">Thermal Simulation of 3D-Printed High-Performance Heat Sinks</h3>
+      <p class="project-desc">Authored Master's thesis at Fraunhofer FEP Dresden on the thermal simulation and design of additively manufactured heat sinks. Developed physical test objects, conducted rigorous experimental flow measurements, and validated the CFD model to 92% accuracy through data post-processing of heat transfer and multi-physics interactions.</p>
+      <div class="project-footer">
+        <div class="project-tools">
+          <span class="tool-badge">ANSYS Fluent</span>
+          <span class="tool-badge">PTC Creo</span>
+          <span class="tool-badge">Numerical Methods</span>
+        </div>
+        <span class="project-arrow">↗</span>
+      </div>
+    </div>
+    <div class="project-card reveal">
+      <div class="project-num">02</div>
+      <div class="project-tag" style="color:#0D7B5E; border-color:rgba(13,123,94,0.35)">Industry · MAHLE Behr GmbH</div>
+      <h3 class="project-title">EV Thermal Architecture &amp; Cooling Module Optimisation</h3>
+      <p class="project-desc">Developed and optimised thermal architectures and cooling modules for electric vehicles using 1D/3D simulation. Conducted TIM thickness parameter studies across 3 cell chemistries, achieving an 8°C reduction in peak cell temperature. Translated findings into practical improvements for heat pumps and flow distribution units.</p>
+      <div class="project-footer">
+        <div class="project-tools">
+          <span class="tool-badge">1D/3D Simulation</span>
+          <span class="tool-badge">MAHLE BISS</span>
+          <span class="tool-badge">BTMS</span>
+        </div>
+        <span class="project-arrow">↗</span>
+      </div>
+    </div>
+    <div class="project-card reveal">
+      <div class="project-num">03</div>
+      <div class="project-tag" style="color:#F5C842; border-color:rgba(245,200,66,0.35)">Automation · Leifheit AG</div>
+      <h3 class="project-title">PLC-Automated Test Bench System</h3>
+      <p class="project-desc">Automated two test benches using Siemens S7 PLC via TIA-Portal, cutting setup time by approximately 30%. Modified existing test rigs and developed new setups for rigorous physical measurement of mechanical and electronic systems, with full technical documentation.</p>
+      <div class="project-footer">
+        <div class="project-tools">
+          <span class="tool-badge">Siemens S7 PLC</span>
+          <span class="tool-badge">TIA-Portal</span>
+          <span class="tool-badge">LabVIEW</span>
+        </div>
+        <span class="project-arrow">↗</span>
+      </div>
+    </div>
+    <div class="project-card reveal">
+      <div class="project-num">04</div>
+      <div class="project-tag" style="color:#E8510A; border-color:rgba(232,81,10,0.35)">Student · Formula SAE</div>
+      <h3 class="project-title">Formula SAE — Automotive Component Design &amp; Testing</h3>
+      <p class="project-desc">Collaborated within a cross-functional student team to design, assemble, and test mechanical automotive components under strict competition deadlines. Developed practical skills in DFM, structural testing, and engineering team coordination.</p>
+      <div class="project-footer">
+        <div class="project-tools">
+          <span class="tool-badge">CAD</span>
+          <span class="tool-badge">Structural Testing</span>
+          <span class="tool-badge">Team Engineering</span>
+        </div>
+        <span class="project-arrow">↗</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE + EDUCATION -->
+<section class="experience" id="experience">
+  <div class="section-eyebrow">Career</div>
+  <div class="exp-grid">
+    <div>
+      <h2 class="section-title reveal">Work<br>Experience</h2>
+      <div class="timeline reveal">
+        <div class="timeline-item">
+          <div class="tl-date">09/2024 — Present</div>
+          <div class="tl-role">Advanced Engineering Upskilling</div>
+          <div class="tl-company">Self-directed · Regensburg, Germany</div>
+          <div class="tl-desc">Intensive self-study programme focused on structural simulations and advanced engineering coursework, alongside professional German language development (B1) for technical environments.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="tl-date">11/2023 — 08/2024</div>
+          <div class="tl-role">Research Assistant</div>
+          <div class="tl-company">Fraunhofer FEP · Dresden, Germany</div>
+          <div class="tl-desc">Master's thesis on thermal simulation of 3D-printed heat sinks using CFD and numerical methods. Experimental flow measurements and 92% simulation validation via multi-physics data post-processing. Tools: ANSYS Fluent, PTC Creo.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="tl-date">03/2023 — 08/2023</div>
+          <div class="tl-role">Pre-development Intern — Thermal &amp; E-Mobility</div>
+          <div class="tl-company">MAHLE Behr GmbH · Stuttgart, Germany</div>
+          <div class="tl-desc">Thermal architecture and cooling module optimisation using 1D/3D simulation. TIM parameter studies across 3 cell chemistries reduced peak cell temp by 8°C. Supported multidisciplinary spec creation.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="tl-date">03/2022 — 07/2022</div>
+          <div class="tl-role">Test Lab &amp; Automation Intern</div>
+          <div class="tl-company">Leifheit AG · Koblenz, Germany</div>
+          <div class="tl-desc">Developed and modified test rigs for mechanical and electronic system measurement. Automated two test benches via Siemens S7 PLC, reducing setup time by ~30%.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="tl-date">05/2019 — 03/2020</div>
+          <div class="tl-role">Associate Engineer</div>
+          <div class="tl-company">Jupiter Surface Technologies · Chennai, India</div>
+          <div class="tl-desc">Mechanical design of modules and components for automated plants. Managed cross-functional tasks covering budget, technical specifications, and stakeholder communication.</div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <h2 class="section-title reveal">Education &amp;<br>Certifications</h2>
+      <div class="timeline reveal">
+        <div class="timeline-item">
+          <div class="tl-date">03/2021 — 08/2024</div>
+          <div class="tl-role">MSc Simulation and System Design</div>
+          <div class="tl-company">Hochschule Stralsund · Germany</div>
+          <div class="tl-desc">Specialisation in thermal simulation, CFD, multi-physics modelling, and system design. Thesis conducted at Fraunhofer FEP on additively manufactured heat sink simulation.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="tl-date">08/2015 — 04/2019</div>
+          <div class="tl-role">BEng Production Engineering</div>
+          <div class="tl-company">Anna University · India</div>
+          <div class="tl-desc">Foundations in manufacturing processes, mechanical systems, design engineering, and materials science. Participated in Formula SAE student competition.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="tl-date">Certifications</div>
+          <div class="tl-role">Professional Qualifications</div>
+          <div class="tl-company"></div>
+          <div class="tl-desc">CATIA V5 — Beginner to Advanced (Automotive &amp; Industrial)<br>Lean Six Sigma — Green Belt<br>MATLAB Onramp</div>
+        </div>
+        <div class="timeline-item">
+          <div class="tl-date">Languages</div>
+          <div class="tl-role">Communication</div>
+          <div class="tl-company"></div>
+          <div class="tl-desc">English — Advanced (C2)<br>German — Intermediate (B1, actively improving)</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="section-eyebrow">Reach Out</div>
+  <h2 class="section-title reveal">Contact</h2>
+  <div class="contact-cards reveal">
+    <div class="contact-card" style="--accent:#E8510A">
+      <div class="cc-icon">✉️</div>
+      <div class="cc-label">Email</div>
+      <div class="cc-val"><a href="mailto:clementfrancis2297@gmail.com">clementfrancis2297@gmail.com</a></div>
+    </div>
+    <div class="contact-card" style="--accent:#0D7B5E">
+      <div class="cc-icon">📞</div>
+      <div class="cc-label">Phone</div>
+      <div class="cc-val"><a href="tel:+4917673563307">+49 176 73563307</a></div>
+    </div>
+    <div class="contact-card" style="--accent:#F5C842">
+      <div class="cc-icon">📍</div>
+      <div class="cc-label">Location</div>
+      <div class="cc-val"><span>Straubinger Straße 1<br>93055 Regensburg, Germany</span></div>
+    </div>
+    <div class="contact-card" style="--accent:#E8510A">
+      <div class="cc-icon">🔗</div>
+      <div class="cc-label">LinkedIn</div>
+      <div class="cc-val"><a href="https://linkedin.com/in/yourprofile" target="_blank">linkedin.com/in/yourprofile</a></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-copy">© 2025 Clement Francis — All rights reserved</div>
+  <div class="footer-tag">Built with precision. Deployed with purpose.</div>
+</footer>
+
+<script>
+  const reveals = document.querySelectorAll('.reveal');
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 80);
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.08 });
+  reveals.forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
